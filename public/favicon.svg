@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626"/>
+      <stop offset="100%" style="stop-color:#991b1b"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.25)"/>
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="96" ry="96" fill="url(#bg)"/>
+  <!-- Shine overlay -->
+  <rect width="512" height="512" rx="96" ry="96" fill="url(#shine)"/>
+  <!-- Shield icon -->
+  <path d="M256 72c0 0 -128 32 -148 48c-8 6 -12 16 -12 28v108c0 72 40 136 160 184c120-48 160-112 160-184V148c0-12-4-22-12-28C384 104 256 72 256 72z" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="12"/>
+  <!-- Inner shield highlight -->
+  <path d="M256 112c0 0 -100 28 -116 40c-4 3 -8 10 -8 18v88c0 56 32 108 124 148c92-40 124-92 124-148V170c0-8-4-15-8-18C356 140 256 112 256 112z" fill="rgba(255,255,255,0.1)"/>
+  <!-- Cross/Plus symbol inside shield -->
+  <rect x="232" y="168" width="48" height="168" rx="8" fill="white"/>
+  <rect x="184" y="228" width="144" height="48" rx="8" fill="white"/>
+  <!-- Bottom pulse line -->
+  <path d="M112 420 L192 420 L220 380 L248 440 L276 370 L304 430 L320 420 L400 420" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+</svg>

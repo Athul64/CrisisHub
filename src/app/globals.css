@@ -1,0 +1,468 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-crisis-red: #dc2626;
+  --color-crisis-red-dark: #991b1b;
+  --color-crisis-orange: #ea580c;
+  --color-crisis-yellow: #eab308;
+  --color-crisis-green: #22c55e;
+  --color-dark-bg: #0a0a0f;
+  --color-dark-card: #111119;
+  --color-dark-border: #1e1e2e;
+  --color-dark-surface: #16161f;
+}
+
+/* ─── Theme Variables ─── */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --surface: #f3f4f6;
+  --surface-hover: #e5e7eb;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --input-bg: #f9fafb;
+  --input-border: #d1d5db;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --skeleton-from: #e5e7eb;
+  --skeleton-to: #f3f4f6;
+  --toast-bg: #ffffff;
+  --toast-border: #e5e7eb;
+  --toast-shadow: rgba(0, 0, 0, 0.1);
+  --gradient-start: #f8fafc;
+  --gradient-mid: #f1f5f9;
+  --gradient-end: #f8fafc;
+  --accent-glow: rgba(220, 38, 38, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+[data-theme="dark"] {
+  --background: #050508;
+  --foreground: #ededed;
+  --surface: #111119;
+  --surface-hover: #1a1a26;
+  --card-bg: #0d0d14;
+  --card-border: #1e1e2e;
+  --header-bg: rgba(5, 5, 8, 0.85);
+  --input-bg: rgba(17, 17, 25, 0.8);
+  --input-border: #2d2d3d;
+  --text-primary: #f1f1f1;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --glass-bg: rgba(17, 17, 25, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --skeleton-from: #1e1e2e;
+  --skeleton-to: #111119;
+  --toast-bg: #111119;
+  --toast-border: #1e1e2e;
+  --toast-shadow: rgba(0, 0, 0, 0.4);
+  --gradient-start: #050508;
+  --gradient-mid: #0a0a12;
+  --gradient-end: #050508;
+  --accent-glow: rgba(220, 38, 38, 0.15);
+}
+
+[data-theme="light"] {
+  --background: #fafbfc;
+  --foreground: #111827;
+  --surface: #f3f4f6;
+  --surface-hover: #e5e7eb;
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --header-bg: rgba(250, 251, 252, 0.85);
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --skeleton-from: #e5e7eb;
+  --skeleton-to: #f3f4f6;
+  --toast-bg: #ffffff;
+  --toast-border: #e5e7eb;
+  --toast-shadow: rgba(0, 0, 0, 0.1);
+  --gradient-start: #fafbfc;
+  --gradient-mid: #f1f5f9;
+  --gradient-end: #fafbfc;
+  --accent-glow: rgba(220, 38, 38, 0.08);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, 'Inter', system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Scrollbar Styling ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ─── Selection Color ─── */
+::selection {
+  background: rgba(220, 38, 38, 0.3);
+  color: var(--text-primary);
+}
+
+/* ─── SOS Button Glow Animation ─── */
+@keyframes sos-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.4), 0 0 60px rgba(220, 38, 38, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(220, 38, 38, 0.8), 0 0 100px rgba(220, 38, 38, 0.4);
+  }
+}
+
+@keyframes sos-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ─── SOS Ripple on press ─── */
+@keyframes sos-ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ─── Critical alert blink ─── */
+@keyframes critical-blink {
+  0%, 100% {
+    border-color: rgba(220, 38, 38, 0.8);
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.3);
+  }
+  50% {
+    border-color: rgba(220, 38, 38, 0.3);
+    box-shadow: 0 0 5px rgba(220, 38, 38, 0.1);
+  }
+}
+
+/* ─── Slide-in / Fade-in / Spin ─── */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Toast Animations ─── */
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+}
+
+@keyframes toast-progress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+/* ─── Skeleton Loading ─── */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-from) 25%,
+    var(--skeleton-to) 50%,
+    var(--skeleton-from) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ─── Offline Banner ─── */
+@keyframes offline-slide {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.offline-banner {
+  animation: offline-slide 0.3s ease-out;
+}
+
+/* ─── Glassmorphism utilities ─── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px var(--toast-shadow);
+}
+
+/* ─── Location autocomplete dropdown ─── */
+.location-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px var(--toast-shadow);
+  animation: slide-down 0.15s ease-out;
+}
+
+.location-dropdown-item {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location-dropdown-item:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+.location-dropdown-item:last-child {
+  border-radius: 0 0 12px 12px;
+}
+
+.location-dropdown-item:hover,
+.location-dropdown-item.active {
+  background: var(--accent-glow);
+}
+
+.location-dropdown-item .highlight {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* ─── GPS Locate Button ─── */
+@keyframes locate-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.locating {
+  animation: locate-pulse 1s ease-in-out infinite;
+}
+
+/* ─── Floating Action Button ─── */
+@keyframes fab-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ─── Focus Visible ─── */
+*:focus-visible {
+  outline: 2px solid #dc2626;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Tooltip ─── */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 4px 12px var(--toast-shadow);
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ─── Report History Card ─── */
+.history-card {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 14px;
+  transition: all 0.2s ease;
+}
+
+.history-card:hover {
+  background: var(--surface-hover);
+  transform: translateY(-1px);
+}
+
+/* ─── Enhanced Input Focus for Light Theme ─── */
+[data-theme="light"] input,
+[data-theme="light"] textarea,
+[data-theme="light"] select {
+  color: #111827;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* ─── Print Styles ─── */
+@media print {
+  header, footer, .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
